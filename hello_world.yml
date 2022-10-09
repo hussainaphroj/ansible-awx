@@ -3,4 +3,4 @@
   tasks:
     - name: Hello Message
       debug:
-        msg: "Hello AWX! It works"
+        msg: "Hello AWX! It works and testing"
