@@ -1,6 +1,12 @@
 - name: Hello World Sample
   hosts: all
+  vars:
+    myname: "Afroz Hussain"
   tasks:
     - name: Hello Message
       debug:
         msg: "Hello AWX! It works and testing"
+    
+    - name: display variabel
+      debug:
+        msg: "Hello Mr. {{ myname }}"
