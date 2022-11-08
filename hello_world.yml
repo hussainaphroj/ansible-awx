@@ -5,8 +5,8 @@
   tasks:
     - name: Hello Message
       debug:
-        msg: "Hello AWX! It works and testing"
+        msg: "Hello AWX! It works!"
     
-    - name: display variabel
+    - name: display variable
       debug:
         msg: "Hello Mr. {{ myname }}"
