@@ -88,11 +88,15 @@ An inventory contains the target hosts/node details which can be managed from an
 Finally, we need to create a template, which runs our playbook. We need to provide the organization, project, inventory, and playbook details that we have created previously. It can be created by Resources -> Templates as shown below:
 ![templates ](images/template.png) 
 
-The templates(playbook) can be run multiple time by providing the different variables as shown below:
+The templates(playbook) can be run multiple times by providing the different variables as shown below:
 ![1stRun ](images/1run.png)   
-
 ![2ndRun ](images/2ndrun.png) 
-![2ndrunb ](images/2ndrunb.png) 
+![2ndrunb ](images/2ndrunb.png)   
+
+
+
+That's all Folks! Please give me a star if you like my work!
+Happy Learning! Cheers!
 
 
 
