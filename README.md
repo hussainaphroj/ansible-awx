@@ -95,7 +95,7 @@ The templates(playbook) can be run multiple times by providing the different var
 
 
 
-That's all Folks! Please give me a star if you like my work!
+That's all Folks! Please give me a star if you like my work!  
 Happy Learning! Cheers!
 
 
