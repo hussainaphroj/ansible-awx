@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: Get VM info from vCenter
-      community.vmware.vmware_guest_info:
+      community.vmware.vmware_guest_find:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
@@ -17,7 +17,7 @@
         name: "{{ vm_info.instance.hw_eth0.ipaddresses[0] }}" # Or the VM guest hostname
         groups: discovered_vms
         ansible_host: "{{ vm_info.instance.hw_eth0.ipaddresses[0] }}"
-        vcenter_folder_path: "{{ vm_info.instance.hw_folder }}"
+        vcenter_folder_path: "{{ vm_info.folders[0] }}/{{ vm_name }}"
 - name: Execute tasks on guest OS using VMware Tools
   hosts: discovered_vms
   gather_facts: false
