@@ -1,0 +1,34 @@
+---
+- name: Query vCenter and track VM folder paths
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Get VM info from vCenter
+      community.vmware.vmware_guest_info:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+        datacenter: "{{ datacenter_name }}"
+        name: "{{ vm_name }}"
+      register: vm_info
+
+    - name: Dynamically inject VM into memory with folder path variables
+      ansible.builtin.add_host:
+        name: "{{ vm_info.instance.hw_eth0.ipaddresses[0] }}" # Or the VM guest hostname
+        groups: discovered_vms
+        ansible_host: "{{ vm_info.instance.hw_eth0.ipaddresses[0] }}"
+        vcenter_folder_path: "{{ vm_info.instance.hw_folder }}"
+---
+- name: Execute tasks on guest OS using VMware Tools
+  hosts: discovered_vms
+  gather_facts: false
+  vars:
+    # Tell Ansible to route connection through VMware Tools instead of SSH/WinRM
+    ansible_connection: community.vmware.vmware_tools
+    ansible_vmware_tools_user: "guest_os_username"
+    ansible_vmware_tools_password: "guest_os_password"
+  tasks:
+    - name: Run ping test inside guest
+      ansible.builtin.ping:
