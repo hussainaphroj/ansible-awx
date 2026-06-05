@@ -27,8 +27,8 @@
   vars:
     # Tell Ansible to route connection through VMware Tools instead of SSH/WinRM
     ansible_connection: community.vmware.vmware_tools
-    ansible_vmware_tools_user: "guest_os_username"
-    ansible_vmware_tools_password: "guest_os_password"
+    ansible_vmware_tools_user: "{{ guest_os_username }}"
+    ansible_vmware_tools_password: "{{ guest_os_password }}"
   tasks:
     - name: Run ping test inside guest
       ansible.builtin.ping:
