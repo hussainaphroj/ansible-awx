@@ -10,8 +10,7 @@
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         validate_certs: false
-        datacenter: "{{ datacenter_name }}"
-        name: "{{ vm_name }}"
+        vm_name: "{{ vm_name }}"
       register: vm_info
 
     - name: Dynamically inject VM into memory with folder path variables
