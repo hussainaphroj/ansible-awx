@@ -1,4 +1,3 @@
----
 - name: Query vCenter and track VM folder paths
   hosts: localhost
   connection: local
@@ -19,7 +18,6 @@
         groups: discovered_vms
         ansible_host: "{{ vm_info.instance.hw_eth0.ipaddresses[0] }}"
         vcenter_folder_path: "{{ vm_info.instance.hw_folder }}"
----
 - name: Execute tasks on guest OS using VMware Tools
   hosts: discovered_vms
   gather_facts: false
