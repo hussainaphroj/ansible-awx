@@ -1,0 +1,30 @@
+---
+- name: Debug AWX Pod Network to vCenter
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: 1. Test DNS Resolution
+      ansible.builtin.command: "getent hosts {{ vcenter_hostname }}"
+      register: dns_test
+      ignore_errors: true
+
+    - name: 2. Test Network Route / Packet Path
+      ansible.builtin.command: "traceroute -n -T -p 443 {{ vcenter_hostname }}"
+      register: trace_test
+      ignore_errors: true
+
+    - name: 3. Test Raw TCP Port 443 Connection
+      ansible.builtin.wait_for:
+        host: "{{ vcenter_hostname }}" # Replace with your exact vCenter IP or FQDN
+        port: 443
+        timeout: 5
+      register: port_test
+      ignore_errors: true
+
+    - name: Print Debug Results
+      ansible.builtin.debug:
+        msg: 
+          - "DNS Result: {{ dns_test.stdout | default(dns_test.stderr) }}"
+          - "Traceroute Result: {{ trace_test.stdout | default(trace_test.stderr) }}"
+          - "Port Result: {{ port_test.msg | default('Connected successfully!') }}"
