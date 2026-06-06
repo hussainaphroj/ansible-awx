@@ -15,4 +15,4 @@
     - name: Print Debug Results
       ansible.builtin.debug:
         msg: 
-          - "Port Result: {{ port_test.msg }}"
+          - "Port Result: {{ port_test }}"
