@@ -15,6 +15,4 @@
     - name: Print Debug Results
       ansible.builtin.debug:
         msg: 
-          - "DNS Result: {{ dns_test.stdout | default(dns_test.stderr) }}"
-          - "Traceroute Result: {{ trace_test.stdout | default(trace_test.stderr) }}"
           - "Port Result: {{ port_test.msg }}"
