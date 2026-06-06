@@ -11,9 +11,9 @@
         validate_certs: false
         name: "{{ vm_name }}"
       register: vm_info
-      vars:
-        # Highlight: Inject a 15-second low-level socket timeout into the Python runtime
-        ansible_vmware_timeout: 15
+      environment:
+        # Highlight: Force Python to use lower MTU bounds for this task's sockets
+        IFACE_MTU: "1350"
 
     - name: Dynamically inject VM into memory with folder path variables
       ansible.builtin.add_host:
